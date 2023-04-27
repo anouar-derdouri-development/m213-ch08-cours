@@ -34,9 +34,7 @@ public class CallActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK) {
-            boolean r = data.getBooleanExtra("response", false);
-
-            if (r) etPhone.setText("");
+            etPhone.setText("");
         }
     }
 }

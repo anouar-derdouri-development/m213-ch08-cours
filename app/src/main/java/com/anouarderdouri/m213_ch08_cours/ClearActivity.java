@@ -18,16 +18,12 @@ public class ClearActivity extends AppCompatActivity {
         btnNo = findViewById(R.id.btnNo);
 
         btnYes.setOnClickListener(v -> {
-            Intent intent = new Intent();
-            intent.putExtra("response", true);
-            setResult(RESULT_OK, intent);
+            setResult(RESULT_OK, null);
             finish();
         });
 
         btnNo.setOnClickListener(v -> {
-            Intent intent = new Intent();
-            intent.putExtra("response", false);
-            setResult(RESULT_OK, intent);
+            setResult(RESULT_CANCELED, null);
             finish();
         });
     }

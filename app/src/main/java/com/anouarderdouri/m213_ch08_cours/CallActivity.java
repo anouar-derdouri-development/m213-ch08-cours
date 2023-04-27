@@ -33,7 +33,7 @@ public class CallActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (data != null) {
+        if (resultCode == RESULT_OK) {
             boolean r = data.getBooleanExtra("response", false);
 
             if (r) etPhone.setText("");

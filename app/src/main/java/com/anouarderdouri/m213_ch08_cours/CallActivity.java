@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class CallActivity extends AppCompatActivity {
+    public static final int CLEAR_REQUEST = 1;
     EditText etPhone;
     Button btnCall, btnClear;
 
@@ -25,7 +26,7 @@ public class CallActivity extends AppCompatActivity {
 
         btnClear.setOnClickListener(v -> {
             Intent intent = new Intent(CallActivity.this, ClearActivity.class);
-            startActivityForResult(intent, 100);
+            startActivityForResult(intent, CLEAR_REQUEST);
         });
     }
 
@@ -33,8 +34,10 @@ public class CallActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == RESULT_OK) {
-            etPhone.setText("");
+        if (requestCode == CLEAR_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                etPhone.setText("");
+            }
         }
     }
 }

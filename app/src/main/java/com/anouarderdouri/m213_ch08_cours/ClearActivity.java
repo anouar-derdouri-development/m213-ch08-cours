@@ -18,13 +18,16 @@ public class ClearActivity extends AppCompatActivity {
         btnNo = findViewById(R.id.btnNo);
 
         btnYes.setOnClickListener(v -> {
-            // https://stackoverflow.com/questions/5104269/using-startactivityforresult-how-to-get-requestcode-in-child-activity#:~:text=The%20request%20code%20is%20not%20passed%20to%20the%20started%20activity%20automatically%20because%20it%20doesn%27t%20(and%20shouldn%27t)%20need%20to%20know%20this%20value.%20It%20only%20needs%20to%20know%20what%20to%20do%20and%20not%20where%20it%20was%20started%20from.
-            setResult(RESULT_OK, null);
+            Intent replyIntent = new Intent();
+            replyIntent.putExtra("response", true);
+            setResult(RESULT_OK, replyIntent);
             finish();
         });
 
         btnNo.setOnClickListener(v -> {
-            setResult(RESULT_CANCELED, null);
+            Intent replyIntent = new Intent();
+            replyIntent.putExtra("response", false);
+            setResult(RESULT_OK, replyIntent);
             finish();
         });
     }

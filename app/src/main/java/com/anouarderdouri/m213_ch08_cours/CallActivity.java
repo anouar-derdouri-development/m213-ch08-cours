@@ -1,5 +1,9 @@
 package com.anouarderdouri.m213_ch08_cours;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +21,8 @@ public class CallActivity extends AppCompatActivity {
     EditText etPhone;
     Button btnCall, btnClear;
 
+    ActivityResultLauncher<Intent> confirmClear;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,36 +32,24 @@ public class CallActivity extends AppCompatActivity {
         btnCall = findViewById(R.id.btnCall);
         btnClear = findViewById(R.id.btnClear);
 
+        confirmClear = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if (result.getResultCode() == RESULT_OK) {
+                            Intent data = result.getData();
+
+                            if (data.getBooleanExtra("response", false))
+                                etPhone.setText("");
+                        }
+                    }
+                }
+        );
+
         btnClear.setOnClickListener(v -> {
             Intent intent = new Intent(CallActivity.this, ClearActivity.class);
-            startActivityForResult(intent, CLEAR_REQUEST);
+            confirmClear.launch(intent);
         });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == CLEAR_REQUEST) {
-            if (resultCode == RESULT_OK) {
-                etPhone.setText("");
-            }
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(CallActivity.this);
-
-        builder.setTitle("Attention")
-                .setMessage("Are you sure?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        CallActivity.super.onBackPressed();
-                    }
-                })
-                .setNegativeButton("No", null)
-                .show();
     }
 }

@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -50,6 +51,20 @@ public class CallActivity extends AppCompatActivity {
         btnClear.setOnClickListener(v -> {
             Intent intent = new Intent(CallActivity.this, ClearActivity.class);
             confirmClear.launch(intent);
+        });
+
+        btnCall.setOnClickListener(v -> {
+            String phone = etPhone.getText().toString();
+
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            intent.setData(Uri.parse(String.format("tel:%s", phone)));
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
+            } else Toast.makeText(this, "Sorry!!!", Toast.LENGTH_SHORT).show();
+
+            /*
+                Common Intents: https://developer.android.com/guide/components/intents-common
+             */
         });
     }
 }

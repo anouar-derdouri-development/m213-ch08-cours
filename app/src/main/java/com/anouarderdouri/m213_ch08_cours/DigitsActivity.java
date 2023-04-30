@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class DigitsActivity extends AppCompatActivity {
+public class DigitsActivity extends AppCompatActivity implements NumericUpDownFragment.OnValueChanged {
     NumericUpDownFragment numericUpDownFragment;
     TextView tvDigit;
 
@@ -22,14 +22,14 @@ public class DigitsActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fLayNumericUpDown, numericUpDownFragment, null)
                 .commit();
+    }
 
-        findViewById(R.id.btnShow).setOnClickListener(v -> {
-            int digit = numericUpDownFragment.getValue();
+    @Override
+    public void onChanged() {
+        int digit = numericUpDownFragment.getValue();
 
-            String[] digits = getResources().getStringArray(R.array.digits);
+        String[] digits = getResources().getStringArray(R.array.digits);
 
-            tvDigit.setText(digits[digit]);
-        });
-
+        tvDigit.setText(digits[digit]);
     }
 }

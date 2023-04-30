@@ -1,5 +1,6 @@
 package com.anouarderdouri.m213_ch08_cours;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class NumericUpDownFragment extends Fragment {
+    private OnValueChanged parentActivity;
     private Button btnDecrement, btnIncrement;
     private TextView tvValue;
 
@@ -50,6 +52,7 @@ public class NumericUpDownFragment extends Fragment {
             if (value > min) {
                 value--;
                 tvValue.setText(Integer.toString(value));
+                parentActivity.onChanged();
             }
         });
 
@@ -57,8 +60,19 @@ public class NumericUpDownFragment extends Fragment {
             if (value < max) {
                 value++;
                 tvValue.setText(Integer.toString(value));
+                parentActivity.onChanged();
             }
         });
     }
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        parentActivity = (OnValueChanged) getActivity();
+    }
+
+    interface OnValueChanged {
+        void onChanged();
+    }
 }

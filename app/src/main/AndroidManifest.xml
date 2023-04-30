@@ -13,16 +13,20 @@
         android:theme="@style/Theme.M213ch08cours"
         tools:targetApi="31">
         <activity
-            android:name=".ClearActivity"
-            android:exported="false" />
-        <activity
-            android:name=".CallActivity"
+            android:name=".DigitsActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".ClearActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CallActivity"
+            android:exported="false">
         </activity>
     </application>
 

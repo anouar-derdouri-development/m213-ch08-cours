@@ -6,9 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".DigitsActivity">
 
-    <fragment
-        android:id="@+id/frNumericUpDown"
-        android:name="com.anouarderdouri.m213_ch08_cours.NumericUpDownFragment"
+    <FrameLayout
+        android:id="@+id/fLayNumericUpDown"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -29,5 +28,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnShow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Show digit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

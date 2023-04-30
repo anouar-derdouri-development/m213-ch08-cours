@@ -13,12 +13,17 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class NumericUpDownFragment extends Fragment {
-    Button btnDecrement, btnIncrement;
-    TextView tvValue;
+    private Button btnDecrement, btnIncrement;
+    private TextView tvValue;
 
-    int min = 0;
-    int max = 9;
-    int value = min;
+    private  int min = 0;
+    private int max = 9;
+
+    public int getValue() {
+        return value;
+    }
+
+    private int value = min;
 
     public NumericUpDownFragment() {
         // Required empty public constructor

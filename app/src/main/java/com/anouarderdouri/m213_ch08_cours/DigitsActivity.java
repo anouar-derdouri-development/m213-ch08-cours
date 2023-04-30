@@ -8,28 +8,24 @@ import android.widget.Toast;
 
 public class DigitsActivity extends AppCompatActivity implements NumericUpDownFragment.OnValueChanged {
     NumericUpDownFragment numericUpDownFragment;
-    TextView tvDigit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_digits);
 
-        tvDigit = findViewById(R.id.tvDigit);
-
         numericUpDownFragment = new NumericUpDownFragment();
 
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fLayNumericUpDown, numericUpDownFragment, null)
                 .commit();
+
     }
 
     @Override
     public void onChanged() {
         int digit = numericUpDownFragment.getValue();
 
-        String[] digits = getResources().getStringArray(R.array.digits);
 
-        tvDigit.setText(digits[digit]);
     }
 }
